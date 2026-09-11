@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Warcraft 3D — Browser RTS Playground</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <canvas id="scene"></canvas>
+    <canvas id="selection-box"></canvas>
+
+    <header id="topbar">
+      <div class="logo">⚔️ Warcraft <span>3D</span></div>
+      <div class="resources">
+        <div class="res" title="Gold — harvest from the gold mine with peasants">🪙 <b id="res-gold">0</b></div>
+        <div class="res" title="Wood — harvest from trees with peasants">🪵 <b id="res-wood">0</b></div>
+        <div class="res" title="Food — farms / unit upkeep">🍖 <b id="res-food">0/0</b></div>
+        <div class="res" title="Enemy strength">👹 <b id="res-wave">Wave 0</b></div>
+      </div>
+      <div class="top-actions">
+        <button id="btn-help" title="Help (H)">?</button>
+        <button id="btn-cam" title="Reset camera (C)">🎥</button>
+        <button id="btn-pause" title="Pause (P)">⏸</button>
+      </div>
+    </header>
+
+    <div id="objective">Destroy the <b>Orc Stronghold</b> to the north-east. Defend your <b>Town Hall</b>!</div>
+    <div id="toast"></div>
+
+    <aside id="minimap-wrap">
+      <canvas id="minimap" width="180" height="180"></canvas>
+      <div class="minimap-label">MINIMAP</div>
+    </aside>
+
+    <footer id="commandbar">
+      <div id="portrait">🛡️<small id="portrait-sub">No selection</small></div>
+      <div id="selinfo">
+        <div id="selname">Select units with left-click / drag box</div>
+        <div id="selhp"></div>
+        <div id="queue"></div>
+      </div>
+      <div id="commands"></div>
+    </footer>
+
+    <div id="help" hidden>
+      <div class="help-card">
+        <h2>Warcraft 3D — How to play</h2>
+        <ul>
+          <li><b>Left click / drag</b>: select units &amp; buildings</li>
+          <li><b>Right click</b>: move · harvest (peasant → tree/mine) · attack (→ enemy)</li>
+          <li><b>A + left click</b>: attack-move · <b>S</b>: stop · <b>H</b>: hold</li>
+          <li><b>G</b>: train Peasant · <b>F</b>: train Footman · <b>B</b>: build Farm (+6 food)</li>
+          <li><b>Camera</b>: WASD / arrows · wheel zoom · middle-drag or Q/E rotate · edge pan</li>
+          <li><b>Peasants</b> carry 10 gold/wood per trip back to the Town Hall.</li>
+          <li>Survive Orc waves. Destroy the <b>Orc Stronghold</b> to win.</li>
+        </ul>
+        <button id="btn-close-help">Start battle! (H)</button>
+      </div>
+    </div>
+
+    <div id="gameover" hidden>
+      <div class="help-card">
+        <h2 id="gameover-title">Victory!</h2>
+        <p id="gameover-sub"></p>
+        <button id="btn-restart">Play again (R)</button>
+      </div>
+    </div>
+
+    <div id="loading"><div class="spinner"></div><p>Summoning peasants…</p></div>
+  </div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
