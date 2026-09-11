@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>HOTLINE MIAMI 3D — fan homage</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%8E%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="game"></canvas>
+
+  <!-- CRT / VHS overlays -->
+  <div id="vignette"></div>
+  <div id="scanlines"></div>
+  <div id="damage-flash"></div>
+  <div id="kill-flash"></div>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="hud-top">
+      <div class="hud-block">
+        <div class="hud-label">FLOOR <span id="hud-floor">1/3</span></div>
+        <div id="hud-objective">HOSTILES: <span id="hud-enemies">0</span></div>
+      </div>
+      <div class="hud-block center">
+        <div id="hud-score">0</div>
+        <div id="hud-combo" class="hidden">x2 COMBO</div>
+      </div>
+      <div class="hud-block right">
+        <div id="hud-weapon">BAT</div>
+        <div id="hud-ammo"></div>
+      </div>
+    </div>
+    <div id="crosshair"></div>
+    <div id="hint">WASD move &nbsp;·&nbsp; MOUSE aim &nbsp;·&nbsp; CLICK attack &nbsp;·&nbsp; E pickup &nbsp;·&nbsp; R restart</div>
+  </div>
+
+  <!-- Start / mask screen -->
+  <div id="menu" class="overlay">
+    <div class="menu-inner">
+      <div class="kicker">A FAN HOMAGE · MIAMI 1989</div>
+      <h1 class="title"><span class="pink">HOTLINE</span> <span class="cyan">MIAMI</span> <span class="yellow">3D</span></h1>
+      <p class="subtitle">One hit kills. You, and them.<br/>Clear each floor. Don't think. Just dial.</p>
+      <div class="masks">
+        <button class="mask selected" data-mask="tiger">
+          <div class="mask-emoji">🐯</div>
+          <div class="mask-name">TIGER</div>
+          <div class="mask-perk">fast fists</div>
+        </button>
+        <button class="mask" data-mask="horse">
+          <div class="mask-emoji">🐴</div>
+          <div class="mask-name">HORSE</div>
+          <div class="mask-perk">+20% speed</div>
+        </button>
+        <button class="mask" data-mask="owl">
+          <div class="mask-emoji">🦉</div>
+          <div class="mask-name">OWL</div>
+          <div class="mask-perk">long combo</div>
+        </button>
+      </div>
+      <button id="start-btn">▶ &nbsp;PICK UP THE PHONE</button>
+      <div class="controls-grid">
+        <div><b>WASD / ←↑↓→</b><span>move</span></div>
+        <div><b>MOUSE</b><span>aim</span></div>
+        <div><b>LMB</b><span>shoot / swing</span></div>
+        <div><b>E</b><span>pick up weapon</span></div>
+        <div><b>R</b><span>restart floor</span></div>
+        <div><b>M</b><span>mute</span></div>
+      </div>
+      <p class="foot">headphones recommended · neon · blood · synth · best on desktop</p>
+    </div>
+  </div>
+
+  <!-- Death -->
+  <div id="death" class="overlay hidden">
+    <div class="menu-inner">
+      <h1 class="title small"><span class="pink">YOU'RE</span> <span class="cyan">DEAD</span></h1>
+      <p class="subtitle" id="death-msg">Wrong move. The phone rings again…</p>
+      <button id="retry-btn">↻ &nbsp;TRY AGAIN [R]</button>
+    </div>
+  </div>
+
+  <!-- Floor clear -->
+  <div id="clear" class="overlay hidden">
+    <div class="menu-inner">
+      <div class="kicker">☎ MESSAGE RECEIVED</div>
+      <h1 class="title small"><span class="yellow">FLOOR</span> <span class="pink">CLEAR</span></h1>
+      <p class="subtitle" id="clear-stats">Score 0 · Time 0:00</p>
+      <button id="next-btn">▼ &nbsp;NEXT FLOOR [ENTER]</button>
+    </div>
+  </div>
+
+  <!-- Victory -->
+  <div id="win" class="overlay hidden">
+    <div class="menu-inner">
+      <div class="kicker">☎ NO MORE CALLS</div>
+      <h1 class="title"><span class="pink">MIAMI</span> <span class="cyan">IS</span> <span class="yellow">YOURS</span></h1>
+      <p class="subtitle" id="win-stats"></p>
+      <button id="again-btn">↻ &nbsp;ONE MORE NIGHT [R]</button>
+    </div>
+  </div>
+
+  <!-- Touch sticks -->
+  <div id="stick-move" class="stick hidden"><div class="nub"></div></div>
+  <div id="stick-aim" class="stick hidden"><div class="nub"></div></div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
