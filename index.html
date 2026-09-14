@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="data:," />
+<title>Castle Click Counter</title>
+<style>
+  body { font-family: system-ui, sans-serif; display: flex; min-height: 100vh; align-items: center; justify-content: center; margin: 0; background: #1a1b26; color: #fff; }
+  main { text-align: center; padding: 2rem 3rem; border-radius: 16px; background: #24283b; box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+  .castle { font-size: 4rem; line-height: 1; }
+  #score { font-size: 2.5rem; font-weight: bold; margin: 0.5rem 0 1rem; }
+  button { font-size: 1.1rem; padding: 0.6rem 1.4rem; border: 0; border-radius: 10px; cursor: pointer; background: #7aa2f7; color: #1a1b26; font-weight: 600; }
+  button:hover { background: #9eceff; }
+  button:active { transform: scale(.97); }
+</style>
+</head>
+<body>
+<main data-checkpoint-smoke="violet-lantern">
+  <div class="castle" aria-hidden="true">🏰</div>
+  <h1>Castle Clicker</h1>
+  <p>Score: <span id="score">0</span></p>
+  <button id="addBtn" type="button">Add point</button>
+</main>
+<script>
+  (function () {
+    var score = 0;
+    var scoreEl = document.getElementById('score');
+    var btn = document.getElementById('addBtn');
+    btn.addEventListener('click', function () {
+      score += 1;
+      scoreEl.textContent = String(score);
+    });
+  })();
+</script>
+</body>
+</html>
