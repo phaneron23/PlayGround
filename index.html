@@ -19,6 +19,7 @@
   <h1>Castle Clicker</h1>
   <p>Score: <span id="score">0</span></p>
   <button id="add-btn" type="button">Add point</button>
+  <button id="reset-btn" type="button">Reset</button>
 </main>
 <script>
   (function () {
@@ -27,6 +28,10 @@
     document.getElementById('add-btn').addEventListener('click', function () {
       score += 1;
       scoreEl.textContent = String(score);
+    });
+    document.getElementById('reset-btn').addEventListener('click', function () {
+      score = 0;
+      scoreEl.textContent = '0';
     });
   })();
 </script>
