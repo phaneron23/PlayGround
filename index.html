@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Castle Clicker</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f3f0ff; }
+  main { background: #fff; border: 2px solid #ddd; border-radius: 12px; padding: 2rem 3rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .castle { font-size: 4rem; line-height: 1; }
+  #score { font-size: 2rem; font-weight: bold; margin: 1rem 0; }
+  button { font-size: 1.1rem; padding: 0.6rem 1.4rem; border: none; border-radius: 8px; background: #6c5ce7; color: #fff; cursor: pointer; }
+  button:hover { background: #5a4bd1; }
+</style>
+</head>
+<body>
+<main data-checkpoint-smoke="violet-lantern">
+  <div class="castle" aria-hidden="true">🏰</div>
+  <h1>Castle Clicker</h1>
+  <div id="score">Score: 0</div>
+  <button id="addBtn" type="button">Add point</button>
+<script>
+  (function () {
+    var count = 0;
+    var scoreEl = document.getElementById('score');
+    var btn = document.getElementById('addBtn');
+    btn.addEventListener('click', function () {
+      count += 1;
+      scoreEl.textContent = 'Score: ' + count;
+    });
+  })();
+</script>
+</main>
+</body>
+</html>
